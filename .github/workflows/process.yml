@@ -2,7 +2,7 @@ name: Process
 on: push
 
 jobs:
-  setup:
+  process-files:
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout Repository
@@ -16,10 +16,6 @@ jobs:
         with:
           deno-version: "1.23.0"
 
-  process-files:
-    needs: setup
-    runs-on: ubuntu-20.04
-    steps:
       - name: Get Branch Name
         id: branch-name
         uses: tj-actions/branch-names@v5

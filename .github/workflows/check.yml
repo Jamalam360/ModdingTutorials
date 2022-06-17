@@ -2,7 +2,7 @@ name: Check
 on: push
 
 jobs:
-  setup:
+  lint:
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout Repository
@@ -16,16 +16,22 @@ jobs:
         with:
           deno-version: "1.23.0"
 
-  lint:
-    needs: setup
-    runs-on: ubuntu-20.04
-    steps:
       - name: Lint
         run: deno lint
 
   fmt:
-    needs: setup
     runs-on: ubuntu-20.04
     steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+
+      - name: Install Deno
+        uses: denoland/setup-deno@v1
+        with:
+          deno-version: "1.23.0"
+
       - name: Format
         run: deno fmt --check
