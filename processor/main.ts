@@ -17,52 +17,54 @@ const PROCESSED_DIRECTORY = join(Deno.cwd(), "processed");
 
 await emptyDir(PROCESSED_DIRECTORY);
 
-let count = 0;
+export async function main() {
+  let count = 0;
 
-const [, timeTaken] = await timeAsync(async () => {
-  for await (const entry of walk(CONTENT_DIRECTORY)) {
-    if (entry.isFile) {
-      if (entry.path.endsWith(".md")) {
-        let processed = await processMarkdown(
-          await Deno.readTextFile(entry.path),
-        );
+  const [, timeTaken] = await timeAsync(async () => {
+    for await (const entry of walk(CONTENT_DIRECTORY)) {
+      if (entry.isFile) {
+        if (entry.path.endsWith(".md")) {
+          let processed = await processMarkdown(
+            await Deno.readTextFile(entry.path),
+          );
 
-        if (!entry.path.includes("special")) {
-          processed = removeFrontMatter(processed);
+          if (!entry.path.includes("special")) {
+            processed = removeFrontMatter(processed);
+          }
+
+          processed = renderMarkdown(processed, {
+            allowIframes: false,
+            baseUrl: "", // TODO(Jamalam360): Fill in with the base URL of the website.
+          });
+
+          const path = join(
+            PROCESSED_DIRECTORY,
+            entry.path.split(CONTENT_DIRECTORY)[1].split(".md")[0] + ".html",
+          );
+
+          await ensureDir(
+            entry.path.replace("content", "processed").split(entry.name)[0],
+          );
+
+          await Deno.writeTextFile(
+            path,
+            processed,
+          );
+
+          count++;
         }
-
-        processed = renderMarkdown(processed, {
-          allowIframes: false,
-          baseUrl: "", // TODO(Jamalam360): Fill in with the base URL of the website.
-        });
-
-        const path = join(
-          PROCESSED_DIRECTORY,
-          entry.path.split(CONTENT_DIRECTORY)[1].split(".md")[0] + ".html",
-        );
-
-        await ensureDir(
-          entry.path.replace("content", "processed").split(entry.name)[0],
-        );
-
-        await Deno.writeTextFile(
-          path,
-          processed,
-        );
-
-        count++;
       }
     }
-  }
 
-  await writeFrontMatters();
-});
+    await writeFrontMatters();
+  });
 
-console.log(
-  `${cyan(count.toString())} files processed in ${
-    green(timeTaken.toFixed(2).toString())
-  }ms`,
-);
+  console.log(
+    `${cyan(count.toString())} files processed in ${
+      green(timeTaken.toFixed(2).toString())
+    }ms`,
+  );
+}
 
 // This function locates references to multiple regions in markdown files, defined with
 // ```{{filePath}@{regionName}}``` and replaces them with the contents of the region.
@@ -90,3 +92,5 @@ ${region.trim()}
 
   return removeOtherRegionTags(markdown);
 }
+
+await main();
