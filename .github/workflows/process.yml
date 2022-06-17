@@ -17,6 +17,7 @@ jobs:
           deno-version: "1.23.0"
 
   process-files:
+    needs: setup
     runs-on: ubuntu-20.04
     steps:
       - name: Get Branch Name
