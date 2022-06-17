@@ -1,0 +1,10 @@
+{
+  "imports": {
+    "$fresh/": "https://raw.githubusercontent.com/lucacasonato/fresh/main/",
+    "$std/": "https://deno.land/std@v0.144.0/",
+    "$markdown/": "https://deno.land/x/gfm@0.1.20/",
+    "components/": "./components/",
+    "islands/": "./islands/",
+    "util/": "./util/"
+  }
+}
