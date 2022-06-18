@@ -1,20 +1,17 @@
 /** @jsx h */
-import { h } from "$fresh/runtime.ts";
-import Counter from "../islands/Counter.tsx";
+import { AppProps, h } from "$fresh/runtime.ts";
+import { tw } from "../twind.ts";
 
-export default function Home() {
+import Footer from "components/footer.tsx";
+
+export default function App({ Component }: AppProps) {
   return (
-    <div>
-      <img
-        src="/logo.svg"
-        height="100px"
-        alt="the fresh logo: a sliced lemon dripping with juice"
-      />
-      <p>
-        Welcome to `fresh`. Try update this message in the ./routes/index.tsx
-        file, and refresh.
-      </p>
-      <Counter start={3} />
+    <div
+      class={tw
+        `font(inter medium) md:px-80 md:pt-6 dark:bg-slate-900 dark:text-white`}
+    >
+      <Component />
+      <Footer />
     </div>
   );
 }
