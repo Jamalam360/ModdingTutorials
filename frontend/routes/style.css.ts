@@ -1,4 +1,4 @@
-import { CSS } from "$markdown/mods.ts";
+import { CSS } from "$markdown/mod.ts";
 import { Handlers } from "$fresh/server.ts";
 
 // This route responds to GET requests to /gfm.css with the GFM CSS from the
