@@ -10,7 +10,11 @@ import { render as renderMarkdown } from "$markdown/mod.ts";
 import { timeAsync } from "util/performance.ts";
 
 import { getRegion, removeOtherRegionTags } from "./regions.ts";
-import { removeFrontMatter, writeFrontMatters } from "./frontMatter.ts";
+import {
+  hasFrontMatter,
+  removeFrontMatter,
+  writeFrontMatters,
+} from "./frontMatter.ts";
 
 const CONTENT_DIRECTORY = join(Deno.cwd(), "content");
 const PROCESSED_DIRECTORY = join(Deno.cwd(), "processed");
@@ -28,7 +32,7 @@ export async function main() {
             await Deno.readTextFile(entry.path),
           );
 
-          if (!entry.path.includes("special")) {
+          if (!entry.path.includes("special") && hasFrontMatter(processed)) {
             processed = removeFrontMatter(processed);
           }
 

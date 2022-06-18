@@ -12,6 +12,10 @@ export interface FrontMatter {
 
 const FRONT_MATTERS: FrontMatter[] = [];
 
+export function hasFrontMatter(content: string): boolean {
+  return content.indexOf("---") == 0;
+}
+
 // Takes the contents of a markdown file, and writes its parsed front matter
 // to the `processed/index.json` file, with it's path as the key.
 // Returns the contents without the front matter.

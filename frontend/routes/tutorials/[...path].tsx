@@ -12,7 +12,9 @@ export const handler: Handlers<string | null> = {
     console.log(path);
 
     const res = await fetch(`http://localhost:8000/api/${path}`);
-    return ctx.render(await res.text());
+    const text = await res.text();
+
+    return ctx.render(text);
   },
 };
 

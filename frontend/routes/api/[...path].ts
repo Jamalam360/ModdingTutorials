@@ -12,18 +12,21 @@ async function fetchPath(path: string): Promise<string> {
   const res = await fetch(`${BASE_URL}/${path}.html`, {
     headers: { Accept: "application/vnd.github.v3.raw" },
   });
+  const text = await res.text();
 
-  return await res.text();
+  console.log(text);
+
+  return text;
 }
 
 export const handler = async (
   ctx: HandlerContext,
 ): Promise<Response> => {
-  console.log(ctx.req);
-
   if (!Object.keys(CACHE).includes(ctx.match.path)) {
     CACHE[ctx.match.path] = await fetchPath(ctx.match.path);
   }
+
+  console.log(CACHE[ctx.match.path]);
 
   return new Response(CACHE[ctx.match.path], {
     headers: { "Content-Type": "text/html" },
