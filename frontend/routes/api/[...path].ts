@@ -13,9 +13,6 @@ async function fetchPath(path: string): Promise<string> {
     headers: { Accept: "application/vnd.github.v3.raw" },
   });
   const text = await res.text();
-
-  console.log(text);
-
   return text;
 }
 

@@ -9,7 +9,6 @@ import Navbar from "components/navbar.tsx";
 export const handler: Handlers<string | null> = {
   async GET(ctx) {
     const { path } = ctx.match;
-    console.log(path);
 
     const res = await fetch(`http://localhost:8000/api/${path}`);
     const text = await res.text();
