@@ -2,7 +2,6 @@
 import { h, PageProps } from "$fresh/runtime.ts";
 import { Handlers } from "$fresh/server.ts";
 import { tw } from "../../twind.ts";
-import "https://esm.sh/prismjs@1.27.0/components/prism-java?no-check";
 
 import Head from "components/head.tsx";
 import Navbar from "components/navbar.tsx";
@@ -28,7 +27,11 @@ export default function Index({ data }: PageProps<string>) {
       <Head />
       <Navbar active="" />
       <div class={tw`flex flex-wrap justify-between items-center pt-4 px-4`}>
-        <div dangerouslySetInnerHTML={{ __html: data }} />
+        <div class="markdown-body highlight">
+          <div
+            dangerouslySetInnerHTML={{ __html: data }}
+          />
+        </div>
       </div>
     </div>
   );
