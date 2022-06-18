@@ -79,6 +79,7 @@ async function processMarkdown(markdown: string): Promise<string> {
   // This should match all regions in the markdown file.
   while ((match = regex.exec(markdown)) !== null) {
     const [, filePath, regionName] = match;
+    const fileExtension = filePath.split(".")[1];
 
     const region = await getRegion(
       join(Deno.cwd(), "mod", filePath),
@@ -87,7 +88,7 @@ async function processMarkdown(markdown: string): Promise<string> {
 
     markdown = markdown.replace(
       match[0],
-      `\`\`\`
+      `\`\`\`${fileExtension}
 ${region.trim()}
 \`\`\`
     `,

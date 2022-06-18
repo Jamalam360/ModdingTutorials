@@ -2,6 +2,7 @@
 import { h, PageProps } from "$fresh/runtime.ts";
 import { Handlers } from "$fresh/server.ts";
 import { tw } from "../../twind.ts";
+import "https://esm.sh/prismjs@1.27.0/components/prism-java?no-check";
 
 import Head from "components/head.tsx";
 import Navbar from "components/navbar.tsx";

@@ -23,8 +23,6 @@ export const handler = async (
     CACHE[ctx.match.path] = await fetchPath(ctx.match.path);
   }
 
-  console.log(CACHE[ctx.match.path]);
-
   return new Response(CACHE[ctx.match.path], {
     headers: { "Content-Type": "text/html" },
   });
