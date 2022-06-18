@@ -6,6 +6,12 @@ import { emptyDir, ensureDir, walk } from "$std/fs/mod.ts";
 import { join } from "$std/path/mod.ts";
 import { cyan, green } from "$std/fmt/colors.ts";
 import { render as renderMarkdown } from "$markdown/mod.ts";
+// Add syntax highlighting for other languages.
+import "https://esm.sh/prismjs@1.27.0/components/prism-java?no-check";
+import "https://esm.sh/prismjs@1.27.0/components/prism-kotlin?no-check";
+import "https://esm.sh/prismjs@1.27.0/components/prism-groovy?no-check";
+import "https://esm.sh/prismjs@1.27.0/components/prism-toml?no-check";
+import "https://esm.sh/prismjs@1.27.0/components/prism-properties?no-check";
 
 import { timeAsync } from "util/performance.ts";
 
