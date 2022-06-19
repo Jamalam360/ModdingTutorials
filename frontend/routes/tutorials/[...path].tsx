@@ -26,8 +26,15 @@ export default function Index({ data }: PageProps<string>) {
     <div>
       <Head />
       <Navbar active="" />
-      <div class={tw`flex flex-wrap justify-between items-center pt-4 px-4`}>
-        <div class="markdown-body highlight">
+      <div
+        class={tw`flex flex-wrap justify-between items-center pt-4 px-4 w-full`}
+      >
+        <div
+          id="markdown"
+          class={tw
+            `w-full font(inter normal) dark:text-white dark:bg-slate-900` +
+            " markdown-body"}
+        >
           <div
             dangerouslySetInnerHTML={{ __html: data }}
           />
