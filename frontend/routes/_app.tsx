@@ -8,7 +8,7 @@ export default function App({ Component }: AppProps) {
   return (
     <div
       class={tw
-        `font(inter medium) md:px-80 md:pt-6 dark:bg-slate-900 dark:text-white`}
+        `font(inter medium) md:px-80 md:pt-6 dark:bg-night dark:text-white`}
     >
       <Component />
       <Footer />

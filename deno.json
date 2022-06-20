@@ -1,6 +1,6 @@
 {
   "tasks": {
-    "start": "deno run -A --watch=frontend/static/,frontend/routes/,frontend/islands/ --no-check ./frontend/dev.ts"
+    "start": "deno run -A --watch=frontend/static/,frontend/routes/,frontend/islands/,frontend/components/,frontend/twind.ts --no-check ./frontend/dev.ts"
   },
   "importMap": "./import_map.json"
 }

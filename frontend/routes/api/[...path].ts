@@ -1,4 +1,4 @@
-import { HandlerContext } from "$fresh/server.ts";
+import { Handler, HandlerContext } from "$fresh/server.ts";
 
 interface Cache {
   [key: string]: string;
@@ -16,14 +16,17 @@ async function fetchPath(path: string): Promise<string> {
   return text;
 }
 
-export const handler = async (
+export const handler: Handler = async (
+  _,
   ctx: HandlerContext,
 ): Promise<Response> => {
-  if (!Object.keys(CACHE).includes(ctx.match.path)) {
-    CACHE[ctx.match.path] = await fetchPath(ctx.match.path);
+  const { path } = ctx.params;
+
+  if (!Object.keys(CACHE).includes(path)) {
+    CACHE[path] = await fetchPath(path);
   }
 
-  return new Response(CACHE[ctx.match.path], {
+  return new Response(CACHE[path], {
     headers: { "Content-Type": "text/html" },
   });
 };

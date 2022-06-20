@@ -12,8 +12,7 @@ export default function Footer() {
         `flex flex-col items-center justify-center border-gray-200 space-y-4 px-2 sm:px-4 pt-8 pb-6 py-2.5`}
     >
       <p>
-        <span class={tw`font-bold`}>©</span> Jamalam and Contributors,{" "}
-        {new Date().getFullYear()}
+        © Jamalam and Contributors, {new Date().getFullYear()}
       </p>
       <ul class={tw`flex flex-row`}>
         <li
@@ -29,6 +28,12 @@ export default function Footer() {
           <a href="https://discord.jamalam.tech">
             <i class={"fa-brands fa-discord " + icon} />
           </a>
+        </li>
+        <li
+          id="dark-mode-toggle-parent"
+          class={navLink}
+        >
+          <i id="dark-mode-toggle" class="fa-solid" />
         </li>
       </ul>
     </div>

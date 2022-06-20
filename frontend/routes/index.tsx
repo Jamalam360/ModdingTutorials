@@ -9,7 +9,7 @@ export default function Index() {
   return (
     <div>
       <Head />
-      <Navbar active="/" />
+      <Navbar />
       <div class={tw`flex flex-wrap justify-between items-center pt-4 px-4`}>
         <p>
           This is a series of Minecraft modding tutorials for the{" "}

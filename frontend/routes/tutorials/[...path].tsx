@@ -7,8 +7,8 @@ import Head from "components/head.tsx";
 import Navbar from "components/navbar.tsx";
 
 export const handler: Handlers<string | null> = {
-  async GET(ctx) {
-    const { path } = ctx.match;
+  async GET(_, ctx) {
+    const { path } = ctx.params;
 
     const res = await fetch(`http://localhost:8000/api/${path}`);
     const text = await res.text();
@@ -25,14 +25,13 @@ export default function Index({ data }: PageProps<string>) {
   return (
     <div>
       <Head />
-      <Navbar active="" />
+      <Navbar />
       <div
         class={tw`flex flex-wrap justify-between items-center pt-4 px-4 w-full`}
       >
         <div
           id="markdown"
-          class={tw
-            `w-full font(inter normal) dark:text-white dark:bg-slate-900` +
+          class={tw`w-full font(inter normal) dark:text-white dark:bg-night` +
             " markdown-body"}
         >
           <div
