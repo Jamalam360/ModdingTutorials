@@ -17,10 +17,9 @@ async function fetchPath(path: string): Promise<string> {
 }
 
 export const handler: Handler = async (
-  _,
   ctx: HandlerContext,
 ): Promise<Response> => {
-  const { path } = ctx.params;
+  const { path } = ctx.match;
 
   if (!Object.keys(CACHE).includes(path)) {
     CACHE[path] = await fetchPath(path);

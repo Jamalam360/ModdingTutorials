@@ -7,8 +7,8 @@ import Head from "components/head.tsx";
 import Navbar from "components/navbar.tsx";
 
 export const handler: Handlers<string | null> = {
-  async GET(_, ctx) {
-    const { path } = ctx.params;
+  async GET(ctx) {
+    const { path } = ctx.match;
 
     const res = await fetch(`http://localhost:8000/api/${path}`);
     const text = await res.text();

@@ -47,14 +47,30 @@ export async function main() {
             baseUrl: "", // TODO(Jamalam360): Fill in with the base URL of the website.
           });
 
-          const path = join(
+          let path = join(
             PROCESSED_DIRECTORY,
             entry.path.split(CONTENT_DIRECTORY)[1].split(".md")[0] + ".html",
           );
 
-          await ensureDir(
-            entry.path.replace("content", "processed").split(entry.name)[0],
-          );
+          // Files named index.md should be named the same as the directory.
+          if (entry.path.endsWith("index.md")) {
+            console.log(entry.path.split(CONTENT_DIRECTORY)[1]);
+            console.log(
+              entry.path.split(CONTENT_DIRECTORY)[1].split("index.md"),
+            );
+
+            path = join(
+              PROCESSED_DIRECTORY,
+              entry.path.split(CONTENT_DIRECTORY)[1].split("index.md")[0].split(
+                "\\",
+              )[1] +
+                ".html",
+            );
+          } else {
+            await ensureDir(
+              entry.path.replace("content", "processed").split(entry.name)[0],
+            );
+          }
 
           await Deno.writeTextFile(
             path,

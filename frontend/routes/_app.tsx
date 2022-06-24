@@ -8,9 +8,10 @@ export default function App({ Component }: AppProps) {
   return (
     <div
       class={tw
-        `font(inter medium) md:px-80 md:pt-6 dark:bg-night dark:text-white`}
+        `h-screen flex flex-col font(inter medium) lg:px-80 md:pt-6 dark:bg-night dark:text-white`}
     >
       <Component />
+      <div class={tw`flex-grow`} />
       <Footer />
     </div>
   );
