@@ -17,6 +17,11 @@ export default function Index() {
       <Head />
       <Navbar />
       <div class={tw`flex flex-wrap justify-between items-center pt-4 px-4`}>
+        {categories.map((category) => (
+          <div class={tw`w-1/2 px-4`}>
+            <a href={`/tutorials/${category}`}>{category}</a>
+          </div>
+        ))}
       </div>
     </div>
   );
