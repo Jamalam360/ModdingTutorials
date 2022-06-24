@@ -53,14 +53,15 @@ export async function main() {
           );
 
           // Files named index.md should be named the same as the directory.
+          // A file at introduction/index.md should be named /introduction.html.
           if (entry.path.endsWith("index.md")) {
-            const directory = entry.path.split(CONTENT_DIRECTORY)[1].split(
-              "/index.md",
-            )[0];
-
+            const dirname = entry.path.split(CONTENT_DIRECTORY)[1].split(
+              "index.md",
+            )[0].split("");
+            dirname.pop();
             path = join(
               PROCESSED_DIRECTORY,
-              directory + ".html",
+              dirname.join("") + ".html",
             );
           } else {
             await ensureDir(
